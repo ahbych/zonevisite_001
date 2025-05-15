@@ -1,8 +1,7 @@
-const zones = ['구역1'];
-const baseUrl = "https://script.google.com/macros/s/AKfycbxM7C3X46cVTIKVqjaWYJqAvnqud-AAn-0BBjUSK2yh0Grb6sanbxL1VLGPRoa_KPCo/exec";
+const zone = '구역1';
+const baseUrl = "https://script.google.com/macros/s/앱스크립트_URL/exec";
 
 function loadZoneData() {
-  const zone = document.getElementById('zoneSelect').value;
   fetch(`${baseUrl}?zone=${zone}`)
     .then(res => res.json())
     .then(data => renderBuildings(data, zone))
@@ -62,13 +61,7 @@ function updateStatus(zone, row, value) {
     .catch(err => console.error("업데이트 실패:", err));
 }
 
+// ✅ 페이지 로드시 바로 구역1 데이터 불러오기
 window.onload = () => {
-  const sel = document.getElementById('zoneSelect');
-  zones.forEach(z => {
-    const opt = document.createElement('option');
-    opt.value = opt.text = z;
-    sel.appendChild(opt);
-  });
-
-  sel.onchange = loadZoneData;
+  loadZoneData();
 };
