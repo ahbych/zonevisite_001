@@ -1,0 +1,20 @@
+body {
+  font-family: sans-serif;
+  padding: 10px;
+}
+button {
+  margin: 2px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.inactive {
+  opacity: 0.3;
+}
+.active {
+  opacity: 1.0;
+}
+.floor {
+  border-top: 1px solid gray;
+  margin-top: 15px;
+  padding-top: 5px;
+}
