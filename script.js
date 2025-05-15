@@ -1,13 +1,12 @@
-const zones = ['구역1'];  // 구글시트의 sheet명 목록
+const zones = ['구역1'];
 const baseUrl = "https://script.google.com/macros/s/AKfycbxM7C3X46cVTIKVqjaWYJqAvnqud-AAn-0BBjUSK2yh0Grb6sanbxL1VLGPRoa_KPCo/exec";
-
-document.getElementById('zoneSelect').onchange = loadZoneData;
 
 function loadZoneData() {
   const zone = document.getElementById('zoneSelect').value;
   fetch(`${baseUrl}?zone=${zone}`)
     .then(res => res.json())
-    .then(data => renderBuildings(data, zone));
+    .then(data => renderBuildings(data, zone))
+    .catch(err => console.error("데이터 불러오기 오류:", err));
 }
 
 function renderBuildings(data, zone) {
@@ -59,9 +58,11 @@ function updateStatus(zone, row, value) {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: new URLSearchParams({ zone, row, col: '방문 표시', value })
-  }).then(() => loadZoneData());
+  }).then(() => loadZoneData())
+    .catch(err => console.error("업데이트 실패:", err));
 }
 
+// ✅ 모든 DOM이 로드된 후 실행
 window.onload = () => {
   const sel = document.getElementById('zoneSelect');
   zones.forEach(z => {
@@ -69,4 +70,7 @@ window.onload = () => {
     opt.value = opt.text = z;
     sel.appendChild(opt);
   });
+
+  // 이 타이밍에 이벤트 연결해야 정상 작동함
+  sel.onchange = loadZoneData;
 };
