@@ -1,5 +1,5 @@
 const zones = ['구역1'];  // 구글시트의 sheet명 목록
-const baseUrl = "https://script.google.com/macros/s/앱스크립트_URL/exec";
+const baseUrl = "https://script.google.com/macros/s/AKfycbxM7C3X46cVTIKVqjaWYJqAvnqud-AAn-0BBjUSK2yh0Grb6sanbxL1VLGPRoa_KPCo/exec";
 
 document.getElementById('zoneSelect').onchange = loadZoneData;
 
